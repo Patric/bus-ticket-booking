@@ -4,19 +4,19 @@
  * @param {!express:Request} req HTTP request context.
  * @param {!express:Response} res HTTP response context.
  */
- const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+ const { initializeApp } = require('firebase-admin/app');
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
+ const { getFirestore } = require('firebase-admin/firestore');
 
  initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://btbticketbooking-default-rtdb.europe-west1.firebasedatabase.app"
  });
 
- exports.helloWorld = (req, res) => {
-    const { getFirestore } = require('firebase-admin/firestore');
+ exports.getTickets = (req, res) => {
+    
     const COLLECTION_NAME = 'Tickets';
-   
     const firestore = getFirestore();
     const id = 'LUgPuiCblXo5NtHIujqj';
     firestore.collection(COLLECTION_NAME)
