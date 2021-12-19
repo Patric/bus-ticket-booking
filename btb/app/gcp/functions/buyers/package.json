@@ -1,0 +1,7 @@
+{
+  "name": "buyers",
+  "version": "1.0.0",
+  "dependencies": {
+    "firebase-admin": "^10.0.1"
+  }
+}

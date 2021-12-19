@@ -14,12 +14,13 @@
   databaseURL: "https://btbticketbooking-default-rtdb.europe-west1.firebasedatabase.app"
  });
 
- exports.getTickets = (req, res) => {
+ exports.buyers = (req, res) => {
     const id = req.param('id')
     
-    const COLLECTION_NAME = 'Tickets';
+    const COLLECTION_NAME = 'Buyers';
     const firestore = getFirestore();
-    // const id = 'LUgPuiCblXo5NtHIujqj';
+    
+    //const id = 'LUgPuiCblXo5NtHIujqj';
     firestore.collection(COLLECTION_NAME)
       .doc(id)
       .get()
