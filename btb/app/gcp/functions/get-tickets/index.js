@@ -15,11 +15,10 @@
  });
 
  exports.getTickets = (req, res) => {
-    const id = req.param('id')
+    const id = req.query.id;
     
     const COLLECTION_NAME = 'Tickets';
     const firestore = getFirestore();
-    // const id = 'LUgPuiCblXo5NtHIujqj';
     firestore.collection(COLLECTION_NAME)
       .doc(id)
       .get()
