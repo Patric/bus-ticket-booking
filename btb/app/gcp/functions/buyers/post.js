@@ -2,8 +2,6 @@ const { getFirestore } = require('firebase-admin/firestore');
 
 module.exports = {
     trigger: (req, res) => {
-        const id = req.params.id;
-      
         const COLLECTION_NAME = 'Buyers';
         const firestore = getFirestore();
         
