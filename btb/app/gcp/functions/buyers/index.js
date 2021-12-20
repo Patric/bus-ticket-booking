@@ -7,10 +7,9 @@
  const { initializeApp } = require('firebase-admin/app');
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
- const { getFirestore } = require('firebase-admin/firestore');
- const functions = require('firebase-functions');
- const get = require('./get');
 
+ const functions = require('firebase-functions');
+ const get = require('./get.js');
 
  initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -27,7 +26,7 @@
  app.use(cors({ origin: true }));
  
  // build multiple CRUD interfaces:
- app.get('/:id', get);
+ app.get('/:id', get.trigger);
 
 
 //  app.post('/', (req, res) => res.send(Widgets.create()));
