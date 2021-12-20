@@ -10,6 +10,7 @@
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
+ const post = require('./get.js');
 
  initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -27,6 +28,8 @@
  
  // build multiple CRUD interfaces:
  app.get('/:id', get.trigger);
+
+ app.post('/', post.trigger);
 
 
 //  app.post('/', (req, res) => res.send(Widgets.create()));
