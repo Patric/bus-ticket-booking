@@ -8,8 +8,8 @@ module.exports = {
 
         firestore.collection(COLLECTION_NAME)
           .add({
-            'email': req.body.email,
-            'person_id': req.body.person_id})
+            email: req.body.email,
+            person_id: req.body.person_id})
           .then(doc => {
             if (!(doc && doc.exists)) {
               res.status(404).send({
