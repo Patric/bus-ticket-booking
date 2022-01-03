@@ -5,13 +5,11 @@ module.exports = {
         const COLLECTION_NAME = 'Buyers';
         const firestore = getFirestore();
 
-        
-
-        firestore.collection(COLLECTION_NAME)
+        firestore.collection('Buyers')
         .doc('dasda')
         .set({
-            email: 'BLABLA',
-            person_id: 'BBAB'})
+            'email': 'BLABLA',
+            'person_id': 'BBAB'})
           .then(doc => {
             if (!(doc && doc.exists)) {
               res.status(404).send({
