@@ -2,7 +2,7 @@ const { getFirestore } = require('firebase-admin/firestore');
 
 module.exports = {
     trigger: (req, res) => {
-        const COLLECTION_NAME = 'Buyers';
+        const COLLECTION_NAME = 'Journeys';
         const firestore = getFirestore();
 
         firestore.collection(COLLECTION_NAME)
