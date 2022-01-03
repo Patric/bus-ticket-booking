@@ -16,7 +16,7 @@ module.exports = {
           time.seconds * 1000 + time.nanoseconds / 1000000,
         );
 
-        const journeysRef = firestore.collection('Journeys').where('date', '==', new Date().toDateString())
+        const journeysRef = firestore.collection('Journeys').where('date', '==', date)
           .get()
           .then(querySnapshot => {
             if (querySnapshot.empty) {
