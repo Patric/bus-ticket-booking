@@ -10,7 +10,7 @@
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
- const post = require('./get.js');
+ const post = require('./post.js');
 
  initializeApp({
   credential: admin.credential.cert(serviceAccount),
