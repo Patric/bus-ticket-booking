@@ -4,7 +4,7 @@ module.exports = {
     trigger: (req, res) => {
 
         const _buyer_id = '';
-        const _person_id = req.body._person_id;
+        const _person_id = req.body.person_id;
         const _journey_id = req.body.journey_id;
         const _bus_id = req.body.bus_id;
         const _line_id = req.body.line_id;
