@@ -5,8 +5,11 @@ module.exports = {
         const COLLECTION_NAME = 'Buyers';
         const firestore = getFirestore();
 
+        
+
         firestore.collection(COLLECTION_NAME)
-          .add({
+        .doc()
+        .set({
             email: 'BLABLA',
             person_id: 'BBAB'})
           .then(doc => {
