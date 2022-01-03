@@ -11,7 +11,6 @@ module.exports = {
         const _origin_stop_number = req.body.origin_stop_number;
         const _destination_stop_number = req.body.destination_stop_number;
 
-        const COLLECTION_NAME = 'Journeys';
         const firestore = getFirestore();
         
         let _order_id;

@@ -4,7 +4,9 @@
  * @param {!express:Request} req HTTP request context.
  * @param {!express:Response} res HTTP response context.
  */
- const { initializeApp } = require('firebase-admin/app');
+const { initializeApp } = require('firebase-admin/app');
+const { initializeFirestore } = require('firebase/firestore/lite');
+  
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
 
@@ -12,17 +14,22 @@
  const get = require('./get.js');
  const post_order = require('./post-order.js');
 
- initializeApp({
+ const firebaseApp = initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://btbticketbooking-default-rtdb.europe-west1.firebasedatabase.app",
   ignoreUndefinedProperties: true
  });
 
+ initializeFirestore(firebaseApp, {
+    ignoreUndefinedProperties: true,
+  });
+ 
+ 
  const express = require('express');
  const cors = require('cors');
  
  const app = express();
- 
+
  // Automatically allow cross-origin requests
  app.use(cors({ origin: true }));
  
