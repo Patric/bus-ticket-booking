@@ -8,7 +8,7 @@ module.exports = {
         
 
         firestore.collection(COLLECTION_NAME)
-        .doc()
+        .doc('dasda')
         .set({
             email: 'BLABLA',
             person_id: 'BBAB'})
