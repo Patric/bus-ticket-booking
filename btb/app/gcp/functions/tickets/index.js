@@ -5,10 +5,10 @@
  * @param {!express:Response} res HTTP response context.
  */
 const { initializeApp } = require('firebase-admin/app');
-const { initializeFirestore } = require('firebase/firestore/lite');
   
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
+
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
@@ -20,10 +20,8 @@ const { initializeFirestore } = require('firebase/firestore/lite');
   ignoreUndefinedProperties: true
  });
 
- initializeFirestore(firebaseApp, {
-    ignoreUndefinedProperties: true,
-  });
- 
+const firestore_settings = { ignoreUndefinedProperties: true };
+admin.firestore().settings(firestore_settings);
  
  const express = require('express');
  const cors = require('cors');
