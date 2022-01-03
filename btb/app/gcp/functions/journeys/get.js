@@ -7,7 +7,7 @@ module.exports = {
         const to = req.query.to;
         const date = req.query.date;
 
-        const journeysRef = firestore.collection('Journeys').where('date', '==', new Date(date))
+        const journeysRef = firestore.collection('Journeys').where('date', '==', new Date(date).toUTCString())
           .get()
           .then(doc => {
             if (!(doc && doc.exists)) {
