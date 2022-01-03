@@ -29,9 +29,7 @@
  // build multiple CRUD interfaces:
  app.get('/:id', get.trigger);
 
- app.post('/', (req, res) => res.send('JEST OKEJ'));
-
-//  app.post('/*', post.trigger);
+ app.post('/', post.trigger);
 
 
 //  app.post('/', (req, res) => res.send(Widgets.create()));
