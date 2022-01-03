@@ -1,3 +1,4 @@
+const e = require('express');
 const { getFirestore } = require('firebase-admin/firestore');
 
 module.exports = {
@@ -17,18 +18,14 @@ module.exports = {
 
         const journeysRef = firestore.collection('Journeys').where('date', '==', date)
           .get()
-          .then(doc => {
-            if (!(doc && doc.exists)) {
+          .then(querySnapshot => {
+            if (querySnapshot.empty) {
               res.status(404).send({
                 error: 'Unable to find the document'
               });
             }
-            const data = doc.data();
-            if (!data) {
-              res.status(404).send({
-                error: 'Found document is empty'
-              });
-            }
+            
+            const data = querySnapshot.docs.map(doc => doc.data());
             res.status(200).send(data);
           }).catch(err => {
             console.error(err);
