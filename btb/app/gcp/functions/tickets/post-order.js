@@ -13,9 +13,6 @@ module.exports = {
 
         const COLLECTION_NAME = 'Journeys';
         const firestore = getFirestore();
-        firestore.settings({
-          ignoreUndefinedProperties: true,
-        })
         
         let _order_id;
 

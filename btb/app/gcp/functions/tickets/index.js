@@ -14,9 +14,9 @@
 
  initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://btbticketbooking-default-rtdb.europe-west1.firebasedatabase.app"
+  databaseURL: "https://btbticketbooking-default-rtdb.europe-west1.firebasedatabase.app",
+  ignoreUndefinedProperties: true
  });
-
 
  const express = require('express');
  const cors = require('cors');
