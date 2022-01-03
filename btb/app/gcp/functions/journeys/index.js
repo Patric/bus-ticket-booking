@@ -31,12 +31,7 @@
 
  app.put('/', post.trigger);
 
-
-//  app.post('/', (req, res) => res.send(Widgets.create()));
-//  app.put('/:id', (req, res) => res.send(Widgets.update(req.params.id, req.body)));
-//  app.delete('/:id', (req, res) => res.send(Widgets.delete(req.params.id)));
-//  app.get('/', (req, res) => res.send(Widgets.list()));
  
  // Expose Express API as a single Cloud Function:
- exports.buyers = functions.https.onRequest(app);
+ exports.journeys = functions.https.onRequest(app);
   
