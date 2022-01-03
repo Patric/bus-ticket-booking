@@ -2,33 +2,13 @@ const { getFirestore } = require('firebase-admin/firestore');
 
 module.exports = {
     trigger: (req, res) => {
+      console.log(req.body);
+
         const COLLECTION_NAME = 'Buyers';
         const firestore = getFirestore();
+        console.log(req.body);
 
-        firestore.collection('Buyers')
-        .doc('dasda')
-        .set({
-            'email': 'BLABLA',
-            'person_id': 'BBAB'})
-          .then(doc => {
-            if (!(doc && doc.exists)) {
-              res.status(404).send({
-                error: 'Unable to find the document'
-              });
-            }
-            const data = doc.data();
-            if (!data) {
-              res.status(404).send({
-                error: 'Found document is empty'
-              });
-            }
-            res.status(200).send(data);
-          }).catch(err => {
-            console.error(err);
-            res.status(404).send({
-              error: 'Unable to retrieve the document',
-              err
-            });
-          });
+        firestore.collection(COLLECTION_NAME)
+          .doc('fdas').get().then( () => res.send("GOT"))
       }
   };
