@@ -2,13 +2,7 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const appendQuery = require('append-query');
-const crypto = require('crypto');
-const Datastore = require('@google-cloud/datastore');
-const fernet = require('fernet');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
-const path = require('path');
-const pug = require('pug');
 
 const ISSUER = 'sample-issuer';
 const JWT_LIFE_SPAN = 1800 * 1000;
