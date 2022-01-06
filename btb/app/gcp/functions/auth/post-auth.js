@@ -26,9 +26,9 @@ function handleImplicitAuthRequest(req, res) {
     .then(() => {
       const html = pug.renderFile(path.join(__dirname, 'auth.pug'), {
         response_type: 'code',
-        client_id: req.query.client_id,
-        redirect_url: req.query.redirect_url,
-        code_challenge: req.query.code_challenge
+        client_id: req.body.client_id,
+        redirect_url: req.body.redirect_url,
+        code_challenge: req.body.code_challenge
       });
       res.status(200).send(html);
     })
