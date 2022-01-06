@@ -20,7 +20,11 @@ function handleImplicitAuthRequest(req, res) {
     .get()
     .then(querySnapshot => {
       if (querySnapshot.empty) {
-        return Promise.reject(new Error('Invalid client/redirect URL.'));
+        console.error(err);
+        res.status(400).send({
+          error: 'Invalid client/redirect URL.',
+          err
+        });
       }
     })
     .then(() => {
