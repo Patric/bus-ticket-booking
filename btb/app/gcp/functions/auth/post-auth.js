@@ -5,8 +5,8 @@ const path = require('path');
 const pug = require('pug');
 
 function handleImplicitAuthRequest(req, res) {
-  if (req.query.client_id === undefined ||
-    req.query.redirect_url === undefined) {
+  if (req.body.client_id === undefined ||
+    req.body.redirect_url === undefined) {
     return res.status(400).send(JSON.stringify({
       'error': 'invalid_request',
       'error_description': 'Required parameters are missing in the request.'
