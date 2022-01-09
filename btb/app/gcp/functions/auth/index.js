@@ -14,8 +14,8 @@ const passport = require("passport")
 const cookieSession = require('cookie-session');
 
 const functions = require('firebase-functions');
-const post_auth = require('./post-auth.js');
-const post_signin = require('./post-signin.js');
+// const post_auth = require('./post-auth.js');
+// const post_signin = require('./post-signin.js');
 
 const firebaseApp = initializeApp({
     credential: admin.credential.cert(serviceAccount),
