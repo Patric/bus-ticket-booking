@@ -76,7 +76,6 @@ app.get('/google',
 
 app.get('/google/callback',
     passport.authenticate('google', {
-        scope: ['email', 'profile'],
         failureRedirect: '/failed',
     }),
     function (req, res) {
