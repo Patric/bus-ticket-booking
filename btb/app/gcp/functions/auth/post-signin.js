@@ -3,9 +3,19 @@ const {
 } = require('firebase-admin/firestore');
 const appendQuery = require('append-query');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const ISSUER = 'sample-issuer';
 const JWT_LIFE_SPAN = 1800 * 1000;
+
+let privateKey;
+fs.readFile('private.pem', 'utf8', function (error, data) {
+  if (error) {
+    console.log(`An error has occurred when reading the key file: ${error}`);
+  } else {
+    privateKey = data;
+  }
+});
 
 function handleImplictSigninRequest (req, res) {
 
