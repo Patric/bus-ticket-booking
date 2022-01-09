@@ -20,12 +20,17 @@ const { initializeApp } = require('firebase-admin/app');
   ignoreUndefinedProperties: true
  });
 
-const firestore_settings = { ignoreUndefinedProperties: true };
-admin.firestore().settings(firestore_settings);
+ const firestore_settings = { ignoreUndefinedProperties: true };
+ admin.firestore().settings(firestore_settings);
  
  const express = require('express');
  const cors = require('cors');
  
+ const passport = require("passport")
+ require('./passport.js');
+ app.use(passport.initialize());
+ app.use(passport.session());
+
  const app = express();
 
  // Automatically allow cross-origin requests
@@ -34,7 +39,7 @@ admin.firestore().settings(firestore_settings);
  // build multiple CRUD interfaces:
  app.get('/', get.trigger);
 
- app.post('/order', post_order.trigger);
+ app.post('/order', passport.authenticate('google'), post_order.trigger);
 
  
  // Expose Express API as a single Cloud Function:
