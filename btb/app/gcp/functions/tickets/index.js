@@ -8,7 +8,7 @@ const { initializeApp } = require('firebase-admin/app');
   
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
- const cookieSession = require('cookie-session');
+
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
@@ -28,15 +28,13 @@ const { initializeApp } = require('firebase-admin/app');
 
 const app = express();
 
-app.use(cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', 'key2']
-}))
-
 const passport = require("passport")
-require('./passport.js');
+require('../passport.js');
+const { cookieSession } = require('../passport.js')
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieSession)
 
  // Automatically allow cross-origin requests
  app.use(cors({ origin: true }));
