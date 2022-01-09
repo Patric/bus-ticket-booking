@@ -31,6 +31,8 @@ admin.firestore().settings(firestore_settings);
 const express = require('express');
 const cors = require('cors');
 
+const app = express();
+
 app.use(cookieSession({
     name: 'google-auth-session',
     keys: ['key1', 'key2']
@@ -38,8 +40,6 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-const app = express();
 
 const isLoggedIn = (req, res, next) => {
     if (req.user) {
