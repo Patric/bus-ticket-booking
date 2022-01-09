@@ -76,10 +76,10 @@ app.get('/google',
 
 app.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/failed',
+        failureRedirect: 'auth/failed',
     }),
     function (req, res) {
-        res.redirect('/success')
+        res.redirect('auth/success')
 
     }
 );
