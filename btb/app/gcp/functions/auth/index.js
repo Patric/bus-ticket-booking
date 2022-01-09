@@ -55,7 +55,7 @@ app.use(cors({
     origin: true
 }));
 
-app.get("/", (req, res) => {
+app.get("/", isLoggedIn, (req, res) => {
     res.json({message: "You are not logged in"})
 })
 
@@ -76,6 +76,7 @@ app.get('/google',
 
 app.get('/google/callback',
     passport.authenticate('google', {
+        scope: ['email', 'profile'],
         failureRedirect: '/failed',
     }),
     function (req, res) {
