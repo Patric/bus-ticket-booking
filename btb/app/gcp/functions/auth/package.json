@@ -13,7 +13,8 @@
     "google-auth-library": "^7.0.2",
     "googleapis-common": "^5.0.2",
     "passport":"^0.5.2",
-    "passport-google-oauth2":"^0.2.0"
+    "passport-google-oauth2":"^0.2.0",
+    "cookie-session":"^2.0.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
