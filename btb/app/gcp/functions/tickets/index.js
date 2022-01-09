@@ -8,7 +8,7 @@ const { initializeApp } = require('firebase-admin/app');
   
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
-
+ const cookieSession = require('cookie-session');
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
