@@ -9,7 +9,11 @@
     "append-query": "^2.0.1",
     "fernet": "^0.3.1",
     "jsonwebtoken": "^8.2.1",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "google-auth-library": "^7.0.2",
+    "googleapis-common": "^5.0.2",
+    "passport":"^0.5.2",
+    "passport-google-oauth2":"^0.2.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
