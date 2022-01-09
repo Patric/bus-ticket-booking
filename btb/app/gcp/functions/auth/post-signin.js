@@ -28,9 +28,9 @@ function handleImplictSigninRequest (req, res) {
         return Promise.reject('Invalid user credentials.')
       }
     })
-    .then(() => firestore.collection('Users')
-    .where('username', '==', req.body.usernamed)
-    .where('password', '==', req.body.password)
+    .then(() => firestore.collection('Clients')
+    .where('client_id', '==', req.body.client_id)
+    .where('redirect_url', '==', req.body.redirect_url)
     .get())
     .then(querySnapshot => {
       if (querySnapshot.empty) {
