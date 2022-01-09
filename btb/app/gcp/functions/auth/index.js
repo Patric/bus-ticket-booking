@@ -10,9 +10,9 @@ const {
 
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
-
+const passport = require("passport")
 const cookieSession = require('cookie-session');
-
+require('./passport.js');
 
 const functions = require('firebase-functions');
 // const post_auth = require('./post-auth.js');
@@ -39,8 +39,6 @@ app.use(cookieSession({
     keys: ['key1', 'key2']
 }))
 
-const passport = require("passport")
-require('./passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
 

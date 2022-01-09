@@ -44,7 +44,11 @@ app.use(passport.session());
  // build multiple CRUD interfaces:
  app.get('/', get.trigger);
 
- app.post('/order', passport.authenticate('google'), post_order.trigger);
+ app.post('/order',  passport.authenticate('google', {
+    scope:
+        ['email', 'profile']
+}
+), post_order.trigger);
 
  
  // Expose Express API as a single Cloud Function:
