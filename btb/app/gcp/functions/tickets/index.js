@@ -40,17 +40,24 @@ app.use(passport.session());
 
  // Automatically allow cross-origin requests
  app.use(cors());
- 
- // build multiple CRUD interfaces:
- app.get('/', passport.authenticate('google', {
-    scope:
-        ['email', 'profile']
-}), get.trigger);
 
- app.post('/order',  passport.authenticate('google', {
-    scope:
-        ['email', 'profile']
-}), post_order.trigger);
+ const jwt = require('jsonwebtoken');
+ const verify = (req, res, next) => {
+    const SECRET_KEY = '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';
+    const token = req.headers.authorization;
+    jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        if (err) {
+            res.status(401).send(err);
+            return;
+        }
+        next();
+    })
+ }
+
+ // build multiple CRUD interfaces:
+ app.get('/', verify, get.trigger);
+
+ app.post('/order', verify, post_order.trigger);
 
  
  // Expose Express API as a single Cloud Function:
