@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports({
+module.exports = ({
     verify:  (req, res, next) => {
        const SECRET_KEY = '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';
        const token = req.headers.authorization;
