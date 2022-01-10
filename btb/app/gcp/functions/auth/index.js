@@ -62,7 +62,7 @@ app.get("/failed", (req, res) => {
 })
 
 app.get("/success",isLoggedIn, (req, res) => {
-    res.send(`Welcome ${req.user.email}`)
+    res.redirect('http://localhost:5200')
 })
 
 app.get('/google',
