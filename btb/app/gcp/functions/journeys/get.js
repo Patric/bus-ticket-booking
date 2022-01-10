@@ -26,13 +26,10 @@ module.exports = {
                 });
               }
               const data = querySnapshot.docs.map(doc => {
-                firestore.collection('Lines').doc(doc.data().line_id).get()
-                  .then(line_qs => {
-                    const line_qs_data = line_qs.docs[0].data();
+                const line_qs_data = firestore.collection('Lines').doc(doc.data().line_id)
                     if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
-                      return new JourneyDTO(line_qs.docs[0].data(), date);
+                      return new JourneyDTO(line_qs_data, date);
                     }
-                  });
               });
                 res.status(200).send(data);
               }).catch(err => {
