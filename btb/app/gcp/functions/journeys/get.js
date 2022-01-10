@@ -26,14 +26,15 @@ module.exports = {
                   error: 'Unable to find the document'
                 });
               }
-              const data = querySnapshot.docs.map(async (doc) => {
-               const line_doc = await firestore.collection('Lines').doc(doc.data().line_id).get();
-                  const line_qs_data = line_doc.data();
-                    // if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
-                    //   return new JourneyDTO(line_qs_data, date);
-                    // }
-                  return line_doc;
-              });
+              const data = querySnapshot.docs.map(doc => doc.data())
+              // .map(async (doc) => {
+              //  const line_doc = await firestore.collection('Lines').doc(doc.data().line_id).get();
+              //     const line_qs_data = line_doc.data();
+              //       // if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
+              //       //   return new JourneyDTO(line_qs_data, date);
+              //       // }
+              //     return line_doc;
+              // });
                 res.status(200).send(data);
               }).catch(err => {
                 console.error(err);
