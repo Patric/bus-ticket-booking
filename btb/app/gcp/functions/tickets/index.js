@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
  // Automatically allow cross-origin requests
- app.use(cors({ origin: true }));
+ app.use(cors());
  
  // build multiple CRUD interfaces:
  app.get('/', passport.authenticate('google', {
