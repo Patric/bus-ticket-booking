@@ -27,9 +27,6 @@ const { initializeApp } = require('firebase-admin/app');
  const cors = require('cors');
 
 const app = express();
-
-
-
 const passport = require("passport")
 require('./passport.js');
 app.use(passport.initialize());
