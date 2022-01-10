@@ -12,7 +12,7 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
 const passport = require("passport")
 const cookieSession = require('cookie-session');
-require('../passport.js');
+require('./passport.js');
 
 const functions = require('firebase-functions');
 // const post_auth = require('./post-auth.js');

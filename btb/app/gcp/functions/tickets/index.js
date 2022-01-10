@@ -8,7 +8,7 @@ const { initializeApp } = require('firebase-admin/app');
   
  var admin = require("firebase-admin");
  var serviceAccount = require("./serviceAccountKey.json");
-
+ const cookieSession = require('cookie-session');
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
@@ -29,8 +29,13 @@ const { initializeApp } = require('firebase-admin/app');
 const app = express();
 
 const passport = require("passport")
-require('../passport.js');
-const { cookieSession } = require('../passport.js')
+require('./passport.js');
+
+const cookieSession = cookieSession({
+    name: 'google-auth-session',
+    keys: ['key1', 'key2']
+})
+
 
 const ensureAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {

@@ -1,6 +1,5 @@
 const passport =require("passport")
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const cookieSession = require('cookie-session');
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -20,12 +19,3 @@ passport.use(new GoogleStrategy({
             return done(null, profile);
     }
 ));
-
-const cookieSession = cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', 'key2']
-})
-
-module.exports = {
-    cookieSession: cookieSession
-  };
