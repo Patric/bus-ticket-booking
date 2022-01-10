@@ -45,6 +45,7 @@ app.use(cookieSession)
         ['email', 'profile']
 }), get.trigger);
 
+
  app.post('/order',  passport.authenticate('google', {
     scope:
         ['email', 'profile']
