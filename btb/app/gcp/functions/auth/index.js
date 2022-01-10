@@ -44,39 +44,42 @@ app.use(passport.session());
 
 const isLoggedIn = (req, res, next) => {
     if (req.user) {
-    next();
+        next();
     } else {
-    res.sendStatus(401);
+        res.sendStatus(401);
     }
-    }
+}
 
 // Automatically allow cross-origin requests
 app.use(cors());
 
 app.get("/", isLoggedIn, (req, res) => {
-    res.json({message: "You are not logged in"})
+    res.json({
+        message: "You are not logged in"
+    })
 })
 
 app.get("/failed", (req, res) => {
     res.send("Failed")
 })
 
+const jwt = require('jsonwebtoken');
 app.get("/success", (req, res) => {
-   // res.redirect('http://localhost:5200')
-   // res.status(201).json({'jwt':'dasdfw'});
+    const SECRET_KEY = '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';
+    let token = jwt.sign(req.user, SECRET_KEY, {
+        expiresIn: 1440
+    });
     var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
     responseHTML = responseHTML.replace('%value%', JSON.stringify({
-        user: req.user
+        authorization: token
     }));
     res.status(200).send(responseHTML);
 })
 
 app.get('/google',
     passport.authenticate('google', {
-            scope:
-                ['email', 'profile']
-        }
-    ));
+        scope: ['email', 'profile']
+    }));
 
 app.get('/google/callback',
     passport.authenticate('google', {
