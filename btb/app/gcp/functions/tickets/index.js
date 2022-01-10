@@ -28,15 +28,15 @@ const { initializeApp } = require('firebase-admin/app');
 
 const app = express();
 
-app.use(cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', 'key2']
-}))
+// app.use(cookieSession({
+//     name: 'google-auth-session',
+//     keys: ['key1', 'key2']
+// }))
 
-const passport = require("passport")
-require('./passport.js');
-app.use(passport.initialize());
-app.use(passport.session());
+// const passport = require("passport")
+// require('./passport.js');
+// app.use(passport.initialize());
+// app.use(passport.session());
 
  // Automatically allow cross-origin requests
  app.use(cors());
