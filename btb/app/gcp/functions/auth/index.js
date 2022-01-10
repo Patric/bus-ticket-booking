@@ -62,7 +62,8 @@ app.get("/failed", (req, res) => {
 })
 
 app.get("/success",isLoggedIn, (req, res) => {
-    res.redirect('http://localhost:5200')
+   // res.redirect('http://localhost:5200')
+    res.status(201).json({'jwt':'aoidsfsoidiofsi'});
 })
 
 app.get('/google',
@@ -72,14 +73,11 @@ app.get('/google',
         }
     ));
 
-app.get('/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/auth/failed',
-    }),
-    function (req, res) {
-        res.redirect('/auth/success')
-
-    }
+app.get('/google/callback', (req, res, next) => {
+    passport.authenticate('google', (err, jwtToken) => {
+        res.status(201).json(jwtToken);
+    })
+}
 );
 
 app.get("/logout", (req, res) => {
