@@ -27,11 +27,16 @@ const { initializeApp } = require('firebase-admin/app');
  const cors = require('cors');
 
 const app = express();
+
+app.use(cookieSession({
+    name: 'google-auth-session',
+    keys: ['key1', 'key2']
+}))
+
 const passport = require("passport")
 require('./passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieSession)
 
  // Automatically allow cross-origin requests
  app.use(cors({ origin: true }));
@@ -41,7 +46,6 @@ app.use(cookieSession)
     scope:
         ['email', 'profile']
 }), get.trigger);
-
 
  app.post('/order',  passport.authenticate('google', {
     scope:
