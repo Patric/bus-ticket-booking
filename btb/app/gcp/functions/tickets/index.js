@@ -25,13 +25,7 @@ const { initializeApp } = require('firebase-admin/app');
  
  const express = require('express');
  const cors = require('cors');
- const corsOptions = {
-    origin: '*',
-    methods: [],
-    allowedHeaders: [],
-    exposedHeaders: [],
-    credentials: true
-};
+
 const app = express();
 
 app.use(cookieSession({
@@ -44,15 +38,8 @@ require('./passport.js');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-  });
-
  // Automatically allow cross-origin requests
- app.use(cors(corsOptions));
+ app.use(cors());
  
  // build multiple CRUD interfaces:
  app.get('/', passport.authenticate('google', {
