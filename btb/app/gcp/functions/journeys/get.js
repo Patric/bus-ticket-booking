@@ -27,9 +27,10 @@ module.exports = {
               }
               const data = querySnapshot.docs.map(doc => {
                 const line_qs_data = firestore.collection('Lines').doc(doc.data().line_id)
-                    if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
-                      return new JourneyDTO(line_qs_data, date);
-                    }
+                    return line_qs_data;
+                    // if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
+                    //   return new JourneyDTO(line_qs_data, date);
+                    // }
               });
                 res.status(200).send(data);
               }).catch(err => {
