@@ -23,31 +23,14 @@
  
  const app = express();
 
- const cookieSession = require('cookie-session');
- app.use(cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', 'key2']
-}))
-
-const passport = require("passport")
-require('./passport.js');
-app.use(passport.initialize());
-app.use(passport.session());
-
  // Automatically allow cross-origin requests
- app.use(cors({ origin: true }));
+ app.use(cors());
  
+const { verify } = require('./verify.js')
  // build multiple CRUD interfaces:
- app.get('/', passport.authenticate('google', {
-    scope:
-        ['email', 'profile']
-}), get.trigger);
+ app.get('/', verify, get.trigger);
 
- app.put('/', passport.authenticate('google', {
-    scope:
-        ['email', 'profile']
-}), post.trigger);
-
+ app.put('/', verify, post.trigger);
 
  // Expose Express API as a single Cloud Function:
  exports.journeys = functions.https.onRequest(app);
