@@ -61,9 +61,14 @@ app.get("/failed", (req, res) => {
     res.send("Failed")
 })
 
-app.get("/success",isLoggedIn, (req, res) => {
+app.get("/success", (req, res) => {
    // res.redirect('http://localhost:5200')
-    res.status(201).json({'jwt':'aoidsfsoidiofsi'});
+   // res.status(201).json({'jwt':'dasdfw'});
+    var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
+    responseHTML = responseHTML.replace('%value%', JSON.stringify({
+        user: req.user
+    }));
+    res.status(200).send(responseHTML);
 })
 
 app.get('/google',
@@ -73,11 +78,13 @@ app.get('/google',
         }
     ));
 
-app.get('/google/callback', (req, res, next) => {
-    passport.authenticate('google', (err, jwtToken) => {
-        res.status(201).json(jwtToken);
-    })
-}
+app.get('/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/auth/failed',
+    }),
+    function (req, res) {
+        res.redirect('/auth/success')
+    }
 );
 
 app.get("/logout", (req, res) => {
