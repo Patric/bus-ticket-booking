@@ -11,7 +11,7 @@ class JourneyDTO {
 }
 
 module.exports = {
-    trigger: (req, res) => {
+    trigger: async (req, res) => {
         const firestore = getFirestore();
         const from = req.query.from;
         const to = req.query.to;
@@ -26,8 +26,8 @@ module.exports = {
                 });
               }
               const data = querySnapshot.docs.map(doc => {
-                const line_qs_data = firestore.collection('Lines').doc(doc.data().line_id)
-                    return line_qs_data;
+                const line_qs_data = await firestore.collection('Lines').doc(doc.data().line_id).get()
+                    return line_qs_data.data();
                     // if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
                     //   return new JourneyDTO(line_qs_data, date);
                     // }
