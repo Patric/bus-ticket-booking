@@ -28,23 +28,10 @@ const { initializeApp } = require('firebase-admin/app');
 
 const app = express();
 
+
+
 const passport = require("passport")
 require('./passport.js');
-
-const cookieSession = cookieSession({
-    name: 'google-auth-session',
-    keys: ['key1', 'key2']
-})
-
-
-const ensureAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-     } else {
-        return res.send(401);
-     }
-}
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieSession)
@@ -53,9 +40,15 @@ app.use(cookieSession)
  app.use(cors({ origin: true }));
  
  // build multiple CRUD interfaces:
- app.get('/', ensureAuthenticated, get.trigger);
+ app.get('/', passport.authenticate('google', {
+    scope:
+        ['email', 'profile']
+}), get.trigger);
 
- app.post('/order', ensureAuthenticated, post_order.trigger);
+ app.post('/order',  passport.authenticate('google', {
+    scope:
+        ['email', 'profile']
+}), post_order.trigger);
 
  
  // Expose Express API as a single Cloud Function:
