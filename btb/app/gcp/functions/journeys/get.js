@@ -2,7 +2,7 @@ const e = require('express');
 const { getFirestore } = require('firebase-admin/firestore');
 
 class JourneyDTO {
-  constructor(date, line)
+  constructor(date, line){}
 }
 
 module.exports = {
