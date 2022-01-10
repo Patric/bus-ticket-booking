@@ -46,6 +46,7 @@ const ensureAuthenticated = (req, res, next) => {
 }
 
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieSession)
 
  // Automatically allow cross-origin requests
