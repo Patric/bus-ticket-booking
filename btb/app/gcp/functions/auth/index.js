@@ -51,9 +51,7 @@ const isLoggedIn = (req, res, next) => {
     }
 
 // Automatically allow cross-origin requests
-app.use(cors({
-    origin: true
-}));
+app.use(cors());
 
 app.get("/", isLoggedIn, (req, res) => {
     res.json({message: "You are not logged in"})
