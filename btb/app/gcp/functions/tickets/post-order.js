@@ -31,7 +31,7 @@ module.exports = {
 
         const ticket = {
           order_id: _order_id,
-          buyer: _buyer,
+          buyer_id: _buyer.id,
           journey_id: _journey_id,
           seat_number: 1,
           person_name: _person_name,
