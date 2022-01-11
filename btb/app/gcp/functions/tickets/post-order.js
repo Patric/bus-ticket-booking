@@ -12,7 +12,21 @@ module.exports = {
     const _journey_id = req.body.journey_id;
     const firestore = getFirestore();
 
+    let journey_departure_date;
     let _order_id;
+
+    firestore.collection('Journeys')
+    .doc(_journey_id)
+    .get()
+    .then(doc => {
+      if (!(doc && doc.exists)) {
+        res.status(404).send({
+          error: `Journey with id ${_journey_id} does not exist`
+        });
+      }
+      journey_departure_date = doc.data().date;
+    })
+
 
     firestore.collection('Orders')
       .add({
@@ -40,7 +54,7 @@ module.exports = {
       person_surname: _person_surname
     };
 
-    const expires_in = 1000;
+    const expires_in = new Date(journey_departure_date) - new Date();
     const SECRET_KEY = '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6';
     const ticket_jwt = jwt.sign(ticket, SECRET_KEY, {
       expiresIn: expires_in
