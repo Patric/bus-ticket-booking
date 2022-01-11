@@ -4,15 +4,10 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     trigger: (req, res) => {
 
-        const _user = req.user;
-        const _buyer_id = '';
-        // const _person_id = req.body.person_id;
+        const _person_name = req.body.person_name;
+        const _person_surname = req.body.person_surname;
+        const _buyer = req.user;
         const _journey_id = req.body.journey_id;
-        // const _bus_id = req.body.bus_id;
-        // const _line_id = req.body.line_id;
-        // const _origin_stop_number = req.body.origin_stop_number;
-        // const _destination_stop_number = req.body.destination_stop_number;
-
         const firestore = getFirestore();
         
         let _order_id;
@@ -20,8 +15,7 @@ module.exports = {
         firestore.collection('Orders')
           .add({
             order_date: new Date().toDateString(),
-            buyer_id: _user
-
+            buyer: _buyer
           })
           .then(docRef => {
             console.log("Document written with ID: ", docRef.id);
@@ -35,27 +29,19 @@ module.exports = {
             });
         });
 
-        const order = {
+        const ticket = {
           order_id: _order_id,
-          user: _user,
+          buyer: _buyer,
           journey_id: _journey_id,
           seat_number: 1,
+          person_name: _person_name,
+          person_surname: _person_surname
         }
 
         firestore.collection('Tickets')
-          .add({
-            order_id: _order_id,
-            user: _user,
-            // person_id: _person_id,
-            journey_id: _journey_id,
-            seat_number: 1,
-            // bus_id:   _bus_id,
-            // line_id: _line_id,
-            // origin_stop_number: _origin_stop_number,
-            // destination_stop_numbe: _destination_stop_number
-          })
+          .add(ticket)
           .then(doc => {
-            res.status(200).send({uniqueTicketCode: jwt.sign(order, '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6')});
+            res.status(200).send({uniqueTicketCode: jwt.sign(ticket, '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6')});
           }).catch(err => {
             console.error(err);
             res.status(404).send({
