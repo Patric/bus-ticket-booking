@@ -9,6 +9,7 @@ module.exports = {
                res.status(401).send(err);
                return;
            }
+           req.user = decoded;
            next();
        })
     }
