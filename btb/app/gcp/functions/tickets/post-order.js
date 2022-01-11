@@ -37,11 +37,14 @@ module.exports = {
           person_name: _person_name,
           person_surname: _person_surname
         }
-
+        
+        const SECRET_KEY = '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6';
+        // get journey by id and count time to expiration
+        const expires_in = 1000;
         firestore.collection('Tickets')
           .add(ticket)
           .then(doc => {
-            res.status(200).send({uniqueTicketCode: jwt.sign(ticket, '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6')});
+            res.status(200).send({uniqueTicketCode: jwt.sign(ticket, SECRET_KEY, { expiresIn: expires_in })} );
           }).catch(err => {
             console.error(err);
             res.status(404).send({

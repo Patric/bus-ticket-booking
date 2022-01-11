@@ -4,11 +4,9 @@ const { getFirestore } = require('firebase-admin/firestore');
 module.exports = {
     trigger: (req, res) => {
         const firestore = getFirestore();
-        const from = req.query.from;
-        const to = req.query.to;
-        const date = req.query.date;
+        const buyer_id = req.user.id;
 
-        firestore.collection('Journeys').where('date', '==', date)
+        firestore.collection('Tickets').where('buyer_id', '==', buyer_id)
           .get()
           .then(querySnapshot => {
             if (querySnapshot.empty) {

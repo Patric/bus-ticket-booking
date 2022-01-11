@@ -67,7 +67,7 @@ app.get("/success", (req, res) => {
     let token = jwt.sign(req.user, SECRET_KEY, {
         expiresIn: 1440
     });
-    var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
+    var responseHTML = '<html><head><title>Authentication</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
     responseHTML = responseHTML.replace('%value%', JSON.stringify({
         authorization: token
     }));
