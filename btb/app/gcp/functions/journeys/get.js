@@ -26,7 +26,7 @@ module.exports = {
                   error: 'Unable to find the document'
                 });
               }
-              const ref = firestore.collection('Lines').doc(ObjectId('PZaneAbV0RJOLxCPLHnD')).get()
+              const ref = firestore.collection('Lines').doc('PZaneAbV0RJOLxCPLHnD').get()
               res.status(200).send(ref.data());
               // const output = [];
               // const data = querySnapshot.docs.forEach(async (doc) => {
