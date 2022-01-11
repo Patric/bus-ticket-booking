@@ -26,9 +26,11 @@ module.exports = {
                   error: 'Unable to find the document'
                 });
               }
+              const ref = firestore.collection('Lines').doc('PZaneAbV0RJOLxCPLHnD').get()
+              res.status(200).send(ref);
               const output = [];
               const data = querySnapshot.docs.forEach(async (doc) => {
-               const line_doc = await firestore.collection('Lines').doc('PZaneAbV0RJOLxCPLHnD').get();
+               const line_doc = firestore.collection('Lines').doc('PZaneAbV0RJOLxCPLHnD').get();
                   const line_qs_data = line_doc.data();
                     // if (line_qs_data.stationFrom === from && line_qs_data.stationTo === to) {
                     //   return new JourneyDTO(line_qs_data, date);
