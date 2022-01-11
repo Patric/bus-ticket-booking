@@ -24,7 +24,7 @@ module.exports = {
           error: `Journey with id ${_journey_id} does not exist`
         });
       }
-      journey_departure_date = doc.data().date;
+      // journey_departure_date = doc.data().date;
     })
 
 
@@ -54,7 +54,7 @@ module.exports = {
       person_surname: _person_surname
     };
 
-    const expires_in = Number(new Date(journey_departure_date) - new Date());
+    const expires_in = 2000;
     const SECRET_KEY = '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6';
     const ticket_jwt = jwt.sign(ticket, SECRET_KEY, {
       expiresIn: expires_in
