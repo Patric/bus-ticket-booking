@@ -10,9 +10,7 @@ module.exports = {
           .get()
           .then(querySnapshot => {
             if (querySnapshot.empty) {
-              res.status(404).send({
-                error: 'Unable to find the document'
-              });
+              res.status(200).send([]);
             }
             
             const data = querySnapshot.docs.map(doc => doc.data());
