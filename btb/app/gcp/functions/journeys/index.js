@@ -28,7 +28,7 @@
  
 const { verify } = require('./verify.js')
  // build multiple CRUD interfaces:
- app.get('/', verify, get.trigger);
+ app.get('/', get.trigger);
 
  app.put('/', verify, post.trigger);
 
