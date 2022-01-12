@@ -3,6 +3,8 @@ const {
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
 
+const { send } = require('./email');
+
 module.exports = {
   trigger: (req, res) => {
 
@@ -77,6 +79,14 @@ module.exports = {
         res.status(200).send({
           ticket_jwt: ticket_jwt
         });
+
+        send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
+         `<h1>Your new ticket reservation</h1>
+         <span>Here is your ticket number: ${ticket_jwt}</span>
+         <br>
+         <span>Best regards</span>
+         <br>
+         <span>Bus ticket booking</span>`)
       }).catch(err => {
         console.error(err);
         res.status(404).send({
