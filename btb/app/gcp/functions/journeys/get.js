@@ -18,7 +18,10 @@ module.exports = {
         const to = req.query.to;
         const date = req.query.date;
 
-        firestore.collection('Journeys').where('date', '==', new Date(date).toDateString())
+        firestore.collection('Journeys')
+        .where('date', '==', new Date(date).toDateString())
+        .where('stationFrom', '==', from)
+        .where('stationTo', '==', to)
           .get()
           .then(querySnapshot => {
               if (querySnapshot.empty) {
