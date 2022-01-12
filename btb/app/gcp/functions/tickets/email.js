@@ -2,7 +2,7 @@
  const mg = require('nodemailer-mailgun-transport');
  const aesjs = require('aes-js')
 
-var aesCbc = new aesjs.ModeOfOperation.cbc('$B&E)H@McQfTjWnZ', '$B&E)H@McQfTjWnZ');
+var aesCbc = new aesjs.ModeOfOperation.cbc('$B&E)H@McQfTjWnZ'.split(''), '$B&E)H@McQfTjWnZ'.split(''));
 const api_key_bytes = aesCbc.decrypt('a469a555c4c010e864fa5e84ed90a39372c23998be980eaa4bc28eead52e19647fdbd8970cac28add1c3782ef0176a23124cdef516c1d4ca8d18ff611cae1061');
 const api_key = aesjs.utils.utf8.fromBytes(api_key_bytes);
 const domain_bytes = aesCbc.decrypt('f52accea98eb18276c576c44fc6afdea01bed5eef517cd23a2ec5e7a08f6d2c4aad8fe877be876a2fd1693c519b464f6f6824b40c89d9ddcca3c6fc519237276');
