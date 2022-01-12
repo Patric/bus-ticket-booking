@@ -1,11 +1,19 @@
  const nodemailer = require('nodemailer');
  const mg = require('nodemailer-mailgun-transport');
+ const aesjs = require('aes-js')
 
- // Mailgun authentication
+var aesCbc = new aesjs.ModeOfOperation.cbc('$B&E)H@McQfTjWnZ', '$B&E)H@McQfTjWnZ');
+const api_key_bytes = aesCbc.decrypt('a469a555c4c010e864fa5e84ed90a39372c23998be980eaa4bc28eead52e19647fdbd8970cac28add1c3782ef0176a23124cdef516c1d4ca8d18ff611cae1061');
+const api_key = aesjs.utils.utf8.fromBytes(api_key_bytes);
+const domain_bytes = aesCbc.decrypt('f52accea98eb18276c576c44fc6afdea01bed5eef517cd23a2ec5e7a08f6d2c4aad8fe877be876a2fd1693c519b464f6f6824b40c89d9ddcca3c6fc519237276');
+const domain = aesjs.utils.utf8.fromBytes(domain_bytes);
+const sender_bytes = aesCbc.decrypt('1706b35e88865cecd837d609ed237db6f1626bfe91fc3515f52037f777f81b7f6698e2f8533118067c52605f5e423cab517a25e37ba877efbe9bd9fd5fc91d76014ac9d003ae476711e4233a57af94a7');
+const sender = aesjs.utils.utf8.fromBytes(sender_bytes);
+// Mailgun authentication
  const auth = {
      auth: {
-         api_key: '1a6860fc97d242abad9525fd1e913c86-76f111c4-a0b23406', // Mailgun API key
-         domain: ' sandbox3e974a6acf134ffbbdca487267decf88.mailgun.org' // Mailgun domain ie. mg.mydomain.com
+         api_key: api_key, // Mailgun API key
+         domain: domain // Mailgun domain ie. mg.mydomain.com
      },
      host: 'api.eu.mailgun.net' // for non-eu only api.moailgun.net
  }
@@ -14,7 +22,7 @@
  module.exports = {
      send: (recipient, subject, htmlMessage) => {
          nodemailerMailgun.sendMail({
-             from: 'busticketbookingsupport@sandbox3e974a6acf134ffbbdca487267decf88.mailgun.org', // environment variable for sender
+             from: sender, // environment variable for sender
              to: recipient, // An array if you have multiple recipients.
              cc: "", // cc or empty
              subject: subject, // subject (from the post request)
