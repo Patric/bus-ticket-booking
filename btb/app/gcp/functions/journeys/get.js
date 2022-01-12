@@ -26,8 +26,10 @@ module.exports = {
                   error: 'Unable to find the document'
                 });
               }
-              const data = querySnapshot.docs.map(doc => { id: doc.id, ...doc.data() });
-              res.status(200).send(data);
+              const data = querySnapshot.docs.map(doc => {
+                return {id: doc.id, ...doc.data()}
+              });
+                res.status(200).send(data);
               }).catch(err => {
                 console.error(err);
                 res.status(404).send({
