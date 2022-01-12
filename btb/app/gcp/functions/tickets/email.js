@@ -14,6 +14,7 @@ const domain = atob('c2FuZGJveDBiZjUyNjUzNTJkNzRiN2I4ZGQ2YzY4M2YwZmYzOWFhLm1haWx
      },
      host: 'api.eu.mailgun.net' // for non-eu only api.moailgun.net
  }
+
  const nodemailerMailgun = nodemailer.createTransport(mg(auth)); // mailgun instance
 
  module.exports = {
@@ -23,12 +24,11 @@ const domain = atob('c2FuZGJveDBiZjUyNjUzNTJkNzRiN2I4ZGQ2YzY4M2YwZmYzOWFhLm1haWx
              to: recipient, // An array if you have multiple recipients.
              cc: "", // cc or empty
              subject: subject, // subject (from the post request)
-             html: message, // html email body (from the post request )
+             html: htmlMessage, // html emailfdf body (from the post request )
          }, (err, info) => {
              if (err) {
-                return;
-             } else {
-                throw new Error('Not successful');
+                 console.error(err)
+                 throw new Error('Not successful');
              }
          })
      }
