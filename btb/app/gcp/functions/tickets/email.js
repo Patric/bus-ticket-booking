@@ -2,7 +2,7 @@
  const mg = require('nodemailer-mailgun-transport');
  const aesjs = require('aes-js')
 
-const key_iv = '$B&E)H@McQfTjWnZ'.split('').map(val => Number(val));
+const key_iv = '$B&E)H@McQfTjWnZ'.split('').map(val => val.charCodeAt(0));
 const aesCbc = new aesjs.ModeOfOperation.cbc(key_iv, key_iv);
 const api_key_bytes = aesCbc.decrypt('a469a555c4c010e864fa5e84ed90a39372c23998be980eaa4bc28eead52e19647fdbd8970cac28add1c3782ef0176a23124cdef516c1d4ca8d18ff611cae1061');
 const api_key = aesjs.utils.utf8.fromBytes(api_key_bytes);
