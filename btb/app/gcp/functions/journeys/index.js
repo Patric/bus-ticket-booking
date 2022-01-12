@@ -10,6 +10,7 @@
 
  const functions = require('firebase-functions');
  const get = require('./get.js');
+ const getById = require('./getById.js');
  const post = require('./post.js');
 
  initializeApp({
@@ -29,6 +30,8 @@
 const { verify } = require('./verify.js')
  // build multiple CRUD interfaces:
  app.get('/', get.trigger);
+
+ app.get('/byId/:id', getById.trigger);
 
  app.put('/', verify, post.trigger);
 
