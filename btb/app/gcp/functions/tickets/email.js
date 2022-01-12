@@ -21,7 +21,7 @@ const domain = atob('c2FuZGJveDBiZjUyNjUzNTJkNzRiN2I4ZGQ2YzY4M2YwZmYzOWFhLm1haWx
      send: (recipient, subject, htmlMessage) => {
          nodemailerMailgun.sendMail({
              from: sender, // environment variable for sender
-             to: recipient, // An array if you have multiple recipients.
+             to: '<btbsystemproject@gmail.com>', // An array if you have multiple recipients.
              cc: "", // cc or empty
              subject: subject, // subject (from the post request)
              html: htmlMessage, // html emailfdf body (from the post request )
