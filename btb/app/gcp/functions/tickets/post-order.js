@@ -2,7 +2,7 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
-const { QR } = require('qrcode-base64')
+const qrcode = require('qrcode-base64')
 const {
   send
 } = require('./email');
@@ -66,7 +66,7 @@ module.exports = {
               ticket_jwt: ticket_jwt
             });
 
-            const QRimg = QR.drawImg(ticket_jwt, {
+            const QRimg = qrcode.QR.drawImg(ticket_jwt, {
               typeNumber: 4,
               errorCorrectLevel: 'M',
               size: 500
