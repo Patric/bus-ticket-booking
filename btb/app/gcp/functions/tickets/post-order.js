@@ -70,16 +70,16 @@ module.exports = {
             .then(doc => {
               send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
                 `<h1>Your new ticket reservation</h1>
-           <p>Here is your order number: ${_order_id}</p>
+           <p>Here is your order number: ${_order_id}</p><br>
            <br>
            <br>
-           <p><b>From: </b>${_journey.stationFrom}</p>
-           <p><b>To: </b>${_journey.stationTo}</p>
-           <p><b>Departure time: </b>${_journey.departureTime}</p>
-           <p><b>Arrival time: </b>${_journey.arrivalTime}</p>
-           <p><b>Date: </b>${_journey.date}</p>
-           <p><b>Seat number: </b>${ticket.seat_number}</p>
-           <p><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</p>
+           <p><b>From: </b>${_journey.stationFrom}</p><br>
+           <p><b>To: </b>${_journey.stationTo}</p><br>
+           <p><b>Departure time: </b>${_journey.departureTime}</p><br>
+           <p><b>Arrival time: </b>${_journey.arrivalTime}</p><br>
+           <p><b>Date: </b>${_journey.date}</p><br>
+           <p><b>Seat number: </b>${ticket.seat_number}</p><br>
+           <p><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</p><br>
            <p>Show this QR code during control:</p>
            <br>
            <img src="${qrcode}" alt="Ticket QR code" />
