@@ -2,7 +2,7 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
-const QRCode = require('qrcode')
+const { QR } = require('qrcode-base64')
 const {
   send
 } = require('./email');
@@ -66,21 +66,24 @@ module.exports = {
               ticket_jwt: ticket_jwt
             });
 
-           QRCode.toString(ticket_jwt, {
-              type: 'terminal'
-            }, (err, qrcode) => {
-              send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
-                `<h1>Your new ticket reservation</h1>
+            const QRimg = QR.drawImg(ticket_jwt, {
+              typeNumber: 4,
+              errorCorrectLevel: 'M',
+              size: 500
+            })
+
+            send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
+              `<h1>Your new ticket reservation</h1>
              <span>Here is your ticket number: ${ticket_jwt}</span>
              <br>
              <p>Show this QR code during control:</p>
-             <img src="data:image/png;base64, ${qrcode}" alt="Ticket QR code" />
+             <img src="data:image/png;base64, ${QRimg}" alt="Ticket QR code" />
              <br>
              <span>Best regards</span>
              <br>
              <br>
              <span>Bus ticket booking</span>`)
-            })
+
           }).catch(err => {
             console.error(err);
             res.status(404).send({
