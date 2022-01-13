@@ -17,3 +17,7 @@ Wyciągnęliśmy z tego wnioski i następnym razem wykorzystaliśmy darmową prz
 
 Ogólny schemat zależności poszczególnych części aplikacji widzimy powyżej.
 Jako uwierzytelnienie zastosowaliśmy oauth, z google pobieramy dane o użytkownikach, następnie do tych danych przypisujemy dane zamówienie. Zamówienie może być imienne. Potem dzięki uwierzytelnieniu oauth możemy wysłać na email użytkownika maila z jego biletem. Niestety nie udało nam się zaimplementować załączania plików do maili, a gmail blokuje wyświetlanie obrazów base64 w mailu, więc kod QR zobacyzć można jedynie w naszej aplikacji, która zaprezentowana została na filmiku dołączonym do sprawozdania. Jako backend wykorzystaliśmy google functions oraz node js. Do autoryzacji bibliotekę passportJS oraz do przechowywania danych Firestore. Wszelkie klucze przechowywane są w repozytorium. W trakcie developmentu repozytorium było publiczne i bardzo szybko dane poufne zostały wykradzione, co także sprawiło nam problemy. Po kontakcie z supportem i przeniesiu kodu do repozytorium prywatnego udało się jednak z nimi poradzić. 
+
+Aplikacja nie działa w trybie produkcyjnym wobec czego zalogować się mogą tylko użytkownicy manualnie dodani do systemu. Aby aplikacja działała produkcyjnie należy spełnić warunki Google:
+ ![image](https://user-images.githubusercontent.com/55952226/149425869-c7ca0669-d61b-4bc0-a779-6ff911616f8a.png)
+
