@@ -9,7 +9,6 @@ const smtpTransport = nodemailer.createTransport("smtps://btbsystemproject%40gma
              from: "BusTicketBooking System ✔ <btbsystemproject@gmail.com>", // sender address
              to: recipient, // list of receivers
              subject: subject, // Subject line
-             text: "New Reservation", // plaintext body
              html: htmlMessage // html body
          }
 
