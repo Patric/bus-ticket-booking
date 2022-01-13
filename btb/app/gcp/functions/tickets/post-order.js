@@ -79,6 +79,8 @@ module.exports = {
              <br>
              <span><b>From: </b>${_journey.stationFrom}</span>
              <p>Show this QR code during control:</p>
+             <br>
+             ${qrcode}
              <img src="${qrcode}" alt="Ticket QR code" />
              <br>
              <span>Best regards</span>
