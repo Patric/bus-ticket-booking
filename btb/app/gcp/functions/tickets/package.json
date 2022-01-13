@@ -11,8 +11,7 @@
     "cookie-session":"^2.0.0",
     "jsonwebtoken": "^8.2.1",
     "nodemailer-mailgun-transport": "2.0",
-    "nodemailer": "6.4.6",
-    "aes-js": "3.1.2"
+    "nodemailer": "6.4.6"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",

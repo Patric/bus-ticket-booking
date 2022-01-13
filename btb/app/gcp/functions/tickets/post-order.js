@@ -2,8 +2,9 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
-
+const admin = require("firebase-admin");
 const { send } = require('./email');
+
 
 module.exports = {
   trigger: (req, res) => {
@@ -79,6 +80,22 @@ module.exports = {
         res.status(200).send({
           ticket_jwt: ticket_jwt
         });
+
+          // Create a notification
+        const payload = {
+          notification: {
+              title:'New reservation',
+              body: ticket_with_jwt,
+              sound: "default"
+          }};
+
+          //Create an options object that contains the time to live for the notification and the priority
+          const options = {
+              priority: "high",
+              timeToLive: 60 * 60 * 24
+          };
+
+        admin.messaging().sendToTopic("pushNotifications", payload, options);
 
         send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
          `<h1>Your new ticket reservation</h1>
