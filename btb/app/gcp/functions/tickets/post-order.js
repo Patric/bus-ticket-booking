@@ -88,18 +88,19 @@ module.exports = {
            <br>
            <br>
            <span>Bus ticket booking</span>`)
-            })
-          res.status(200).send({
-            ticket_jwt: ticket_jwt
-          });
 
-        }).catch(err => {
-          console.error(err);
-          res.status(404).send({
-            error: 'Unable to add document',
-            err
-          });
+              res.status(200).send({
+                ticket_jwt: ticket_jwt
+              });
+            }).catch(err => {
+              console.error(err);
+              res.status(404).send({
+                error: 'Unable to add document',
+                err
+              });
+            });
         });
+
       })
       .catch(error => {
         console.error("Error adding document: ", error);
