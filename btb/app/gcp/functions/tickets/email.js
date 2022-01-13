@@ -1,7 +1,5 @@
  const nodemailer = require('nodemailer');
  const mg = require('nodemailer-mailgun-transport');
- const aesjs = require('aes-js')
-
 const api_key_base = 'OWZhNTYxZmNmODYzODU4NWFhY2Q4ZWM0YmZjZWUwZWQtNzZmMTExYzQtZjM1NWIzMTg=';
 const api_key = atob(api_key_base)
 const sender = atob('YnVzdGlja2V0Ym9va2luZ3N1cHBvcnRAc2FuZGJveDBiZjUyNjUzNTJkNzRiN2I4ZGQ2YzY4M2YwZmYzOWFhLm1haWxndW4ub3Jn')
