@@ -16,6 +16,8 @@ module.exports = {
     const _journey_id = req.body.journey_id;
     const firestore = getFirestore();
 
+    var _journey;
+
     let _order_id;
 
     firestore.collection('Journeys')
@@ -27,7 +29,9 @@ module.exports = {
             error: `Journey with id ${_journey_id} does not exist`
           });
         }
+        _journey = doc.data();
       })
+
 
     firestore.collection('Orders')
       .add({
@@ -70,10 +74,12 @@ module.exports = {
               console.log(qrcode);
               send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
                 `<h1>Your new ticket reservation</h1>
-             <span>Here is your ticket number: ${ticket_jwt}</span>
+             <span>Here is your order number: ${_order_id}</span>
              <br>
+             <br>
+             <span><b>From: </b>${_journey.stationFrom}</span>
              <p>Show this QR code during control:</p>
-             <img src=${qrcode}" alt="Ticket QR code" />
+             <img src="${qrcode}" alt="Ticket QR code" />
              <br>
              <span>Best regards</span>
              <br>
