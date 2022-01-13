@@ -4,7 +4,7 @@ Patryk Sulej, Jakub Nabrdalik Programowanie usług w chmurze 2022
 
 + Link do filmu przedstawiającego działanie aplikacji: https://youtu.be/efsYhZqo3IA
 + Link z głębszym opisem https://youtu.be/w2xAnjbRCIw
-+ Link do repozytorium z częścią klienta aplikacji:
++ Link do repozytorium z częścią klienta aplikacji: https://github.com/jnabrdalik/bus-tickets-client
 + Link do aplikacji: https://bus-tickets-2.ew.r.appspot.com/
 
 W ramach projektu przygotowano aplikację webową do rezerwowania biletów autobusowych z wykorzystaniem platformy Google Cloud.
