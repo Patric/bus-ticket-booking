@@ -57,51 +57,49 @@ module.exports = {
           expiresIn: expires_in
         });
 
-        const ticket_with_jwt = {
-          ...ticket,
-          ticket_jwt: ticket_jwt
-        }
-        // get journey by id and count time to expiration
+        QRCode.toDataURL(ticket_jwt, (err, qrcode) => {
+          const ticket_with_jwt = {
+            ...ticket,
+            ticket_jwt: ticket_jwt,
+            qr_code_url: qrcode
+          }
+          // get journey by id and count time to expiration
 
-        firestore.collection('Tickets')
-          .add(ticket_with_jwt)
-          .then(doc => {
-            res.status(200).send({
-              ticket_jwt: ticket_jwt
-            });
-
-            QRCode.toDataURL(ticket_jwt, (err, qrcode) => {
-              console.log(qrcode);
+          firestore.collection('Tickets')
+            .add(ticket_with_jwt)
+            .then(doc => {
               send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
                 `<h1>Your new ticket reservation</h1>
-             <span>Here is your order number: ${_order_id}</span>
-             <br>
-             <br>
-             <span><b>From: </b>${_journey.stationFrom}</span>
-             <span><b>To: </b>${_journey.stationTo}</span>
-             <span><b>Departure time: </b>${_journey.departureTime}</span>
-             <span><b>Arrival time: </b>${_journey.arrivalTime}</span>
-             <span><b>Date: </b>${_journey.date}</span>
-             <span><b>Seat number: </b>${ticket.seat_number}</span>
-             <span><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</span>
-             <p>Show this QR code during control:</p>
-             <br>
-             ${qrcode}
-             <img src="${qrcode}" alt="Ticket QR code" />
-             <br>
-             <span>Best regards</span>
-             <br>
-             <br>
-             <span>Bus ticket booking</span>`)
+           <span>Here is your order number: ${_order_id}</span>
+           <br>
+           <br>
+           <span><b>From: </b>${_journey.stationFrom}</span>
+           <span><b>To: </b>${_journey.stationTo}</span>
+           <span><b>Departure time: </b>${_journey.departureTime}</span>
+           <span><b>Arrival time: </b>${_journey.arrivalTime}</span>
+           <span><b>Date: </b>${_journey.date}</span>
+           <span><b>Seat number: </b>${ticket.seat_number}</span>
+           <span><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</span>
+           <p>Show this QR code during control:</p>
+           <br>
+           <img src="${qrcode}" alt="Ticket QR code" />
+           <br>
+           <span>Best regards</span>
+           <br>
+           <br>
+           <span>Bus ticket booking</span>`)
             })
-          }).catch(err => {
-            console.error(err);
-            res.status(404).send({
-              error: 'Unable to add document',
-              err
-            });
+          res.status(200).send({
+            ticket_jwt: ticket_jwt
           });
 
+        }).catch(err => {
+          console.error(err);
+          res.status(404).send({
+            error: 'Unable to add document',
+            err
+          });
+        });
       })
       .catch(error => {
         console.error("Error adding document: ", error);
