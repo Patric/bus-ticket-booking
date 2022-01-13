@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const {
   send
 } = require('./email');
-var nodemailer = require("nodemailer");
 
 module.exports = {
   trigger: (req, res) => {
@@ -81,40 +80,6 @@ module.exports = {
         res.status(200).send({
           ticket_jwt: ticket_jwt
         });
-
-        const smtpTransport = nodemailer.createTransport("SMTP", {
-          service: "Gmail",
-          auth: {
-            user: "btbsystemproject@gmail.com",
-            pass: atob('V2lla3N6eVNhbW9jaG9kQmlsZXRaYW1hd2lhbmllUHJvamVrdC4xMjM=')
-          }
-        });
-
-        const mailOptions = {
-          from: "BusTicketBooking System ✔ <btbsystemproject@gmail.com>", // sender address
-          to: _buyer.email, // list of receivers
-          subject: `Your new bus ticket reservation. Order nr. ${_order_id}`, // Subject line
-          text: "New Reservation", // plaintext body
-          html: `<h1>Your new ticket reservation</h1>
-          <span>Here is your ticket number: ${ticket_jwt}</span>
-          <br>
-          <span>Best regards</span>
-          <br>
-          <span>Bus ticket booking</span>` // html body
-        }
-
-        // send mail with defined transport object
-        smtpTransport.sendMail(mailOptions, function (error, response) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("Message sent: " + response.message);
-          }
-
-          // if you don't want to use this transport object anymore, uncomment following line
-          //smtpTransport.close(); // shut down the connection pool, no more messages
-        });
-
 
         send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
           `<h1>Your new ticket reservation</h1>
