@@ -2,6 +2,7 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
+const QRCode = require('qrcode')
 const {
   send
 } = require('./email');
@@ -45,38 +46,42 @@ module.exports = {
           person_name: _person_name,
           person_surname: _person_surname
         };
-    
+
         const expires_in = 2000;
         const SECRET_KEY = '4d5f0629130f331d641e3a5d15cfbd9f79c2f42e1ee9a304e679749a665a22b6';
         const ticket_jwt = jwt.sign(ticket, SECRET_KEY, {
           expiresIn: expires_in
         });
-    
+
         const ticket_with_jwt = {
-          order_id: _order_id,
-          buyer_id: _buyer.id,
-          journey_id: _journey_id,
-          seat_number: 1,
-          person_name: _person_name,
-          person_surname: _person_surname,
+          ...ticket,
           ticket_jwt: ticket_jwt
         }
         // get journey by id and count time to expiration
-    
+
         firestore.collection('Tickets')
           .add(ticket_with_jwt)
           .then(doc => {
             res.status(200).send({
               ticket_jwt: ticket_jwt
             });
-    
-            send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
-              `<h1>Your new ticket reservation</h1>
+
+           QRCode.toString(ticket_jwt, {
+              type: 'terminal'
+            }, (err, qrcode) => {
+              send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
+                `<h1>Your new ticket reservation</h1>
              <span>Here is your ticket number: ${ticket_jwt}</span>
+             <br>
+             <p>Show this QR code during control:</p>
+             <img src="data:image/png;base64, ${qrcode}" alt="Ticket QR code" />
              <br>
              <span>Best regards</span>
              <br>
+             <br>
              <span>Bus ticket booking</span>`)
+              console.log(url)
+            })
           }).catch(err => {
             console.error(err);
             res.status(404).send({

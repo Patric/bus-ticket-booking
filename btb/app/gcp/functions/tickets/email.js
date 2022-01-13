@@ -1,6 +1,5 @@
  const nodemailer = require('nodemailer');
-
-const smtpTransport = nodemailer.createTransport("smtps://btbsystemproject%40gmail.com:"+encodeURIComponent(atob('V2lla3N6eVNhbW9jaG9kQmlsZXRaYW1hd2lhbmllUHJvamVrdC4xMjM=')) + "@smtp.gmail.com:465"); 
+ const smtpTransport = nodemailer.createTransport("smtps://btbsystemproject%40gmail.com:"+encodeURIComponent(atob('V2lla3N6eVNhbW9jaG9kQmlsZXRaYW1hd2lhbmllUHJvamVrdC4xMjM=')) + "@smtp.gmail.com:465"); 
 
  module.exports = {
      send: (recipient, subject, htmlMessage) => {
