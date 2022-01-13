@@ -80,7 +80,6 @@ module.exports = {
              <br>
              <br>
              <span>Bus ticket booking</span>`)
-              console.log(url)
             })
           }).catch(err => {
             console.error(err);
