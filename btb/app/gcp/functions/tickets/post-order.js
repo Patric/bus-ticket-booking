@@ -78,6 +78,12 @@ module.exports = {
              <br>
              <br>
              <span><b>From: </b>${_journey.stationFrom}</span>
+             <span><b>To: </b>${_journey.stationTo}</span>
+             <span><b>Departure time: </b>${_journey.departureTime}</span>
+             <span><b>Arrival time: </b>${_journey.arrivalTime}</span>
+             <span><b>Date: </b>${_journey.date}</span>
+             <span><b>Seat number: </b>${ticket.seat_number}</span>
+             <span><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</span>
              <p>Show this QR code during control:</p>
              <br>
              ${qrcode}
