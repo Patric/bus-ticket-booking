@@ -3,7 +3,7 @@ Google cloud, lambda functions, Firestore application
 Patryk Sulej, Jakub Nabrdalik Programowanie usług w chmurze 2022
 
 + Link do filmu przedstawiającego działanie aplikacji: https://youtu.be/efsYhZqo3IA
-+ Link z głębszym opisem https://youtu.be/w2xAnjbRCIw
++ Link z głębszym opisem https://youtu.be/w2xAnjbRCIw (na początku opis dotyczył diagramu poniżej - nie nagrało się)
 + Link do repozytorium z częścią klienta aplikacji: https://github.com/jnabrdalik/bus-tickets-client
 + Link do aplikacji: https://bus-tickets-2.ew.r.appspot.com/
 
