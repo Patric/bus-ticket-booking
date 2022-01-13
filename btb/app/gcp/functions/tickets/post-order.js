@@ -2,9 +2,10 @@ const {
   getFirestore
 } = require('firebase-admin/firestore');
 const jwt = require('jsonwebtoken');
-const admin = require("firebase-admin");
-const { send } = require('./email');
-
+const {
+  send
+} = require('./email');
+var nodemailer = require("nodemailer");
 
 module.exports = {
   trigger: (req, res) => {
@@ -19,16 +20,16 @@ module.exports = {
     let _order_id;
 
     firestore.collection('Journeys')
-    .doc(_journey_id)
-    .get()
-    .then(doc => {
-      if (!(doc && doc.exists)) {
-        res.status(404).send({
-          error: `Journey with id ${_journey_id} does not exist`
-        });
-      }
-      // journey_departure_date = doc.data().date;
-    })
+      .doc(_journey_id)
+      .get()
+      .then(doc => {
+        if (!(doc && doc.exists)) {
+          res.status(404).send({
+            error: `Journey with id ${_journey_id} does not exist`
+          });
+        }
+        // journey_departure_date = doc.data().date;
+      })
 
 
     firestore.collection('Orders')
@@ -73,7 +74,7 @@ module.exports = {
       ticket_jwt: ticket_jwt
     }
     // get journey by id and count time to expiration
-  
+
     firestore.collection('Tickets')
       .add(ticket_with_jwt)
       .then(doc => {
@@ -81,24 +82,42 @@ module.exports = {
           ticket_jwt: ticket_jwt
         });
 
-          // Create a notification
-        const payload = {
-          notification: {
-              title:'New reservation',
-              body: ticket_with_jwt,
-              sound: "default"
-          }};
+        const smtpTransport = nodemailer.createTransport("SMTP", {
+          service: "Gmail",
+          auth: {
+            user: "btbsystemproject@gmail.com",
+            pass: atob('V2lla3N6eVNhbW9jaG9kQmlsZXRaYW1hd2lhbmllUHJvamVrdC4xMjM=')
+          }
+        });
 
-          //Create an options object that contains the time to live for the notification and the priority
-          const options = {
-              priority: "high",
-              timeToLive: 60 * 60 * 24
-          };
+        const mailOptions = {
+          from: "BusTicketBooking System ✔ <btbsystemproject@gmail.com>", // sender address
+          to: _buyer.email, // list of receivers
+          subject: `Your new bus ticket reservation. Order nr. ${_order_id}`, // Subject line
+          text: "New Reservation", // plaintext body
+          html: `<h1>Your new ticket reservation</h1>
+          <span>Here is your ticket number: ${ticket_jwt}</span>
+          <br>
+          <span>Best regards</span>
+          <br>
+          <span>Bus ticket booking</span>` // html body
+        }
 
-        admin.messaging().sendToTopic("pushNotifications", payload, options);
+        // send mail with defined transport object
+        smtpTransport.sendMail(mailOptions, function (error, response) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Message sent: " + response.message);
+          }
+
+          // if you don't want to use this transport object anymore, uncomment following line
+          //smtpTransport.close(); // shut down the connection pool, no more messages
+        });
+
 
         send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
-         `<h1>Your new ticket reservation</h1>
+          `<h1>Your new ticket reservation</h1>
          <span>Here is your ticket number: ${ticket_jwt}</span>
          <br>
          <span>Best regards</span>
