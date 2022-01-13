@@ -9,9 +9,7 @@ Początkowo jako bazę danych chcieliśmy wykorzystać SQL Server oraz usługę 
 
 Wyciągnęliśmy z tego wnioski i następnym razem wykorzystaliśmy darmową przestrzeń w Firebase przy uzyciu Firestore. 
 
-![image](https://user-images.githubusercontent.com/55952226/149423845-6e3cdeb1-e24f-447d-a790-c3dfc2593c9d.png)
+![image](https://user-images.githubusercontent.com/55952226/149424023-1b14e9d2-8ad4-48ef-82f2-e897120f1215.png)
 
 Ogólny schemat zależności poszczególnych części aplikacji widzimy powyżej.
-Jako uwierzytelnienie zastosowaliśmy oauth, z google pobieramy dane o użytkownikach, następnie do tych danych przypisujemy dane zamówienie. Zamówienie może być imienne. Potem dzięki uwierzytelnieniu oauth możemy wysłać na email użytkownika maila z jego biletem. Niestety nie udało nam się zaimplementować załączania plików do maili, a gmail blokuje wyświetlanie obrazów base64 w mailu, więc kod QR zobacyzć można jedynie w naszej aplikacji, która zaprezentowana została na filmiku dołączonym do sprawozdania. Jako backend wykorzystaliśmy google functions oraz node js. Do autoryzacji bibliotekę passportJS oraz do przechowywania danych Firestore. Wszelkie klucze przechowywane są w repozytorium. W trakcie developmentu repozytorium było publiczne i bardzo szybko dane poufne zostały wykradzione, co także sprawiło nam problemy:
-
-Po kontakcie z supportem i przeniesiu kodu do repozytorium prywatnego udało się jednak poradzić z problemem.
+Jako uwierzytelnienie zastosowaliśmy oauth, z google pobieramy dane o użytkownikach, następnie do tych danych przypisujemy dane zamówienie. Zamówienie może być imienne. Potem dzięki uwierzytelnieniu oauth możemy wysłać na email użytkownika maila z jego biletem. Niestety nie udało nam się zaimplementować załączania plików do maili, a gmail blokuje wyświetlanie obrazów base64 w mailu, więc kod QR zobacyzć można jedynie w naszej aplikacji, która zaprezentowana została na filmiku dołączonym do sprawozdania. Jako backend wykorzystaliśmy google functions oraz node js. Do autoryzacji bibliotekę passportJS oraz do przechowywania danych Firestore. Wszelkie klucze przechowywane są w repozytorium. W trakcie developmentu repozytorium było publiczne i bardzo szybko dane poufne zostały wykradzione, co także sprawiło nam problemy. Po kontakcie z supportem i przeniesiu kodu do repozytorium prywatnego udało się jednak z nimi poradzić. 
