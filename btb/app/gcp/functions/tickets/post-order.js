@@ -68,46 +68,30 @@ module.exports = {
           firestore.collection('Tickets')
             .add(ticket_with_jwt)
             .then(doc => {
-              const filePath = '/ticketsqr';
-              const fileName = `ticket_${_order_id}`;
+              send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
+                `<h1>Your new ticket reservation</h1>
+           <p>Here is your order number: ${_order_id}</p>
+           <br>
+           <br>
+           <p><b>From: </b>${_journey.stationFrom}</p>
+           <p><b>To: </b>${_journey.stationTo}</p>
+           <p><b>Departure time: </b>${_journey.departureTime}</p>
+           <p><b>Arrival time: </b>${_journey.arrivalTime}</p>
+           <p><b>Date: </b>${_journey.date}</p>
+           <p><b>Seat number: </b>${ticket.seat_number}</p>
+           <p><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</p>
+           <p>Show this QR code during control:</p>
+           <br>
+           <img src="${qrcode}" alt="Ticket QR code" />
+           <br>
+           <p>Best regards</p>
+           <br>
+           <br>
+           <p>Bus ticket booking</p>`)
 
-              QRCode.toFile(`${filePath}/${fileName}.png`, ticket_jwt, {
-                color: {
-                  dark: '#00F', // Blue dots
-                  light: '#0000' // Transparent background
-                }
-              }, (err) => {
-                if (err) throw err
-                send(_buyer.email, `Your new bus ticket reservation. Order nr. ${_order_id}`,
-                  `<h1>Your new ticket reservation</h1>
-                    <p>Here is your order number: ${_order_id}</p>
-                    <br>
-                    <br>
-                    <p><b>From: </b>${_journey.stationFrom}</p>
-                    <p><b>To: </b>${_journey.stationTo}</p>
-                    <p><b>Departure time: </b>${_journey.departureTime}</p>
-                    <p><b>Arrival time: </b>${_journey.arrivalTime}</p>
-                    <p><b>Date: </b>${_journey.date}</p>
-                    <p><b>Seat number: </b>${ticket.seat_number}</p>
-                    <p><b>Passenger name: </b>${ticket.person_name} ${ticket.person_surname}</p>
-                    <p>Show this QR code during control:</p>
-                    <br>
-                    <img cid:${fileName} alt="Ticket QR code" />
-                    <br>
-                    <p>Best regards</p>
-                    <br>
-                    <br>
-                    <p>Bus ticket booking</p>`, filePath, fileName, fileName)
-
-                res.status(200).send({
-                  ticket_jwt: ticket_jwt
-                });
-
-
-
-              })
-
-
+              res.status(200).send({
+                ticket_jwt: ticket_jwt
+              });
             }).catch(err => {
               console.error(err);
               res.status(404).send({
